@@ -27,6 +27,49 @@ while position < len(mRNA_excess) - 2 and mRNA_excess[position:(position+3)] != 
     print (mRNA_excess[position:(position+3)])
     position = position + 3
 ## stops at first stop codon
+    if mRNA_excess[position:(position+3)] == "TTT" or "TTC":
+        print ("Phe")
+    if mRNA_excess[position:(position+3)] == "TTA" or "TTG" or "CTT" or "CTC" or "CTA" or "CTG":
+        print ("Leu")
+    if mRNA_excess[position:(position+3)] == "ATT" or "ATC" or "ATA":
+        print ("Ile")
+    if mRNA_excess[position:(position+3)] == "ATG":
+        print ("START")
+    if mRNA_excess[position:(position+3)] == "GTT" or "GTC" or "GTA" or "GTG":
+        print ("Val")
+    if mRNA_excess[position:(position+3)] == "TCT" or "TCC" or "TCA" or "TCG" or "AGT" or "AGC":
+        print ("Ser")
+    if mRNA_excess[position:(position+3)] == "CCT" or "CCC" or "CCA" or "CCG":
+        print ("Pro")
+    if mRNA_excess[position:(position+3)] == "ACT" or "ACC" or "ACA" or "ACG":
+        print ("Thr")
+    if mRNA_excess[position:(position+3)] == "GCT" or "GCC" or "GCA" or "GCG":
+        print ("Ala")
+    if mRNA_excess[position:(position+3)] == "TAT" or "TAC":
+        print ("Tyr")
+    if mRNA_excess[position:(position+3)] == "CAT" or "CAC":
+        print ("His")
+    if mRNA_excess[position:(position+3)] == "CAA" or "CAG":
+        print ("Gln")
+    if mRNA_excess[position:(position+3)] == "AAT" or "AAC":
+        print ("Asn")
+    if mRNA_excess[position:(position+3)] == "AAA" or "AAG":
+        print ("Lys")
+    if mRNA_excess[position:(position+3)] == "GAT" or "GAC":
+        print ("Asp")
+    if mRNA_excess[position:(position+3)] == "GAA" or "GAG":
+        print ("Glu")
+    if mRNA_excess[position:(position+3)] == "TGT" or "TGC":
+        print ("Cys")
+    if mRNA_excess[position:(position+3)] == "TGG":
+        print ("Trp")
+    if mRNA_excess[position:(position+3)] == "CGT" or "CGC" or "CGA" or "CGG" or "AGA" or "AGG":
+        print ("Arg")
+    if mRNA_excess[position:(position+3)] == "GGT" or "GGC" or "GGA" or "GGG":
+        print ("Gly")
+    if mRNA_excess[position:(position+3)] == "TAA" or "TAG" or "UGA":
+        print ("STOP")
+        
 
 
 
@@ -37,3 +80,8 @@ while position < len(mRNA_excess) - 2 and mRNA_excess[position:(position+3)] != 
     # return x + y
 # print add_function (m, n)
 
+
+# produce polypeptide seq
+# can't do methylations and phosphorylation
+# look for polyAsignal,
+# hydrophobic/phillic regions
