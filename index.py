@@ -24,19 +24,32 @@ mRNA_excess.find("STOP")
 ##else:
 ##    position = position + 1
 
-
-#produces entire mRNA
-while position < len(mRNA_excess) - 2 and mRNA_excess[position:(position+3)] != (stopcodon1 or stopcodon2 or stopcodon3) :
-##    if (mRNA_excess[position:(position + 3)]) == (
-    print (mRNA_excess[position:(position+3)])
-    position = position + 3
-    
 first_mRNA_excess = SFTPA1[(SFTPA1.find(METcodon)):]
 first_mRNA = first_mRNA_excess[:(3 + (first_mRNA_excess.find(stopcodon1 or stopcodon2 or stopcodon3)))]
 print (first_mRNA)
 
+#produces entire mRNA
+##def mRNA_producer (DNAseq, position):
+##while position < len(mRNA_excess) - 2 and mRNA_excess[position:(position+3)] != (stopcodon1 or stopcodon2 or stopcodon3) :
+##    if (mRNA_excess[position:(position + 3)]) == (
+##    print (mRNA_excess[position:(position+3)])
+##    position = position + 3
+    
+#produces entire mRNA
+def mRNA_start (DNAseq, position):
+    DNAseq[(DNAseq.find(METcodon)):]
+def mRNA_producer (mRNA_start, position):
+    print (mRNA_start[:(3 + (mRNA_start.find(stopcodon1 or stopcodon2 or stopcodon3)))])
+    
+    
+##    while position < len(DNAseq) - 2:
+##        if (DNAseq[position:(position + 3)]) == METcodon:
+##            print "START"
+##            position = position + 3
+##        else: mRNA_producer (DNAseq, position+3)
+
 ##only half of polypeptide produced 
-def mRNA_producer (DNAseq, position):
+def polypeptide_producer (DNAseq, position):
     while position < len(DNAseq):
         if DNAseq[position:(position+3)] == "TTT" or DNAseq[position:(position + 3)] == "TTC":
             print ("Phe")
