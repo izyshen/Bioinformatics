@@ -34,7 +34,7 @@ def mRNA_producer (DNAseq, position):
                 else: print DNAseq[position:(position + 3)]
                 position = position + 3
             position = len(DNAseq)
-        if position == len(DNAseq) - 3 and DNAseq[position:] != METcodon:
+        elif position == len(DNAseq) - 3 and DNAseq[position:] != METcodon:
             print "No ORF"
             position = len(DNAseq)
         else: position = position + 1
@@ -59,7 +59,7 @@ def codon_counter(DNAseq, position):
     for codon in DNAseq:
         print(codon[position:position+3])
         position = position + 3
-
+                  
 
 ##def main_fcn():
 ##    lister(testDNA, 0)

@@ -15,15 +15,6 @@ start_pos = SFTPA1.index(METcodon)
 mRNA_excess = SFTPA1[start_pos:];
 mRNA_excess.find("STOP")
 
-
-##if (SFTPA1[position:(position+3)]) == METcodon:
-##    print ("ORF" + SFTPA1[position:])
-###    for i in range (len SFTPA1):
-###        print (SFTPA1[i])
-###    print (SFTPA1[position:(position+3)])
-##else:
-##    position = position + 1
-
 first_mRNA_excess = SFTPA1[(SFTPA1.find(METcodon)):]
 first_mRNA = first_mRNA_excess[:(3 + (first_mRNA_excess.find(stopcodon1 or stopcodon2 or stopcodon3)))]
 print (first_mRNA)
@@ -38,9 +29,25 @@ print (first_mRNA)
 #produces entire mRNA
 def mRNA_start (DNAseq, position):
     DNAseq[(DNAseq.find(METcodon)):]
-def mRNA_producer (mRNA_start, position):
+def mRNA_producer1 (mRNA_start, position):
     print (mRNA_start[:(3 + (mRNA_start.find(stopcodon1 or stopcodon2 or stopcodon3)))])
     
+def mRNA_producer (DNAseq, position):
+    if DNAseq[0:3]:
+            print "START"
+    while position < len(DNAseq) - 2:
+        if DNAseq[position:(position + 3)] == METcodon:
+            while position < len(DNAseq):
+                if DNAseq[position:(position + 3)] == (stopcodon1 or stopcodon2 or stopcodon3):
+                    print "STOP"
+                    position = len(DNAseq)
+                else: print DNAseq[position:(position + 3)]
+                position = position + 3
+            position = len(DNAseq)
+        elif position == len(DNAseq) - 3 and DNAseq[position:] != METcodon:
+            print "No ORF"
+            position = len(DNAseq)
+        else: position = position + 1
     
 ##    while position < len(DNAseq) - 2:
 ##        if (DNAseq[position:(position + 3)]) == METcodon:
