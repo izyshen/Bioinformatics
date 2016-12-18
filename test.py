@@ -1,6 +1,6 @@
 print ("Test Page")
 
-testDNA = "ATGCAACGTATTGACCTTTTACTGTACTAA"
+testDNA = "ATGATGCAACGTATTGACCTTTTACTGTACTAA"
 
 # premature stop codon added in + len(DNAseq) not divisible by 3
 testDNA2 = "CATGCAACGTATTGACCTTTTAAAAAAAAAAAAAAAAAAAAAAAAAACTGTACTATAASG"
@@ -31,14 +31,37 @@ def mRNA_producer (DNAseq, position):
                 if DNAseq[position:(position + 3)] == (stopcodon1 or stopcodon2 or stopcodon3):
                     print "STOP"
                     position = len(DNAseq)
-                else: print DNAseq[position:(position + 3)]
-                position = position + 3
+                elif DNAseq[position:(position+3)] == METcodon:
+                    print "START"
+                    position = position + 3
+                else:
+                    print DNAseq[position:(position + 3)]
+                    position = position + 3
             position = len(DNAseq)
         elif position == len(DNAseq) - 3 and DNAseq[position:] != METcodon:
             print "No ORF"
             position = len(DNAseq)
         else: position = position + 1
 
+def mRNA_producer (DNAseq, position):
+    if DNAseq[0:3] == "ATG":
+        print "START"
+        position = position + 3
+        while position < len(DNAseq) - 2:
+            if DNAseq[position:(position + 3)] == METcodon:
+                while position < len(DNAseq):
+                    if DNAseq[position:(position + 3)] == (stopcodon1 or stopcodon2 or stopcodon3):
+                        print "STOP"
+                        position = len(DNAseq)
+                    else:
+                        print DNAseq[position:(position + 3)]
+                        position = position + 3
+                position = len(DNAseq)
+    elif position == len(DNAseq) - 3 and DNAseq[position:] != METcodon:
+        print "No ORF"
+        position = len(DNAseq)
+    else:
+        position = position + 1
 
 # for loops
 ## list of codons
@@ -47,15 +70,16 @@ def mRNA_producer (DNAseq, position):
 ##        print (DNAseq[position:(position + 3)])
 ##        position = position + 3
 
-def lister (DNAseq, position, curr_list):
-    curr_list = ()
+def lister (DNAseq, position):
+    curr_list = ("start")
     while len(DNAseq) != 0:
         print curr_list.extend(DNAseq[position:(position + 3)])
-        DNAseq[position+3:]
+        position = position+3
         
 #this only lists each nucleotide.
 #Want to list them as codons to implement translation
 def codon_counter(DNAseq, position):
+    codon = DNAseq[position:position+3]
     for codon in DNAseq:
         print(codon[position:position+3])
         position = position + 3
