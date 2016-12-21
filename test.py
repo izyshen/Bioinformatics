@@ -128,33 +128,36 @@ def lister (DNAseq, position):
         print curr_list.extend(DNAseq[position:(position + 3)])
         position = position+3
         
-#this only lists each nucleotide.
-#Want to list them as codons to implement translation
-def codon_counter(DNAseq, position):
-    codon = DNAseq[position:position+3]
-    for codon in DNAseq:
-        print(codon[position:position+3])
-        position = position + 3
-                  
-
 ##def main_fcn():
 ##    lister(testDNA, 0)
 ##    codon_counter(lister(testDNA, 0), 0)
-##
+####
 ##
 ##def tripleAll(nums):
 ##    for val in nums:
 ##        print val*3
 ##        
-##n = int(input('Enter the number of times to repeat: '))
-##for i in range(n):
-##    print('This is repetitious!')
+n = int(input('Enter the number of times to repeat: '))
+for i in range(n):
+    print('This is repetitious!')
+
+n = str(input('This is a test: '))
+for i in range(n):
+    print codon#print codons using input
+    #learn for loops first
 ##
 ##def numberList(items):
 ##    number = 1
 ##    for item in items:
 ##        print(number, item)
 ##        number = number + 1
+
+def codonlist(dnaseq):
+    number = 1
+    for codon in dnaseq:
+        print (number, codon)
+        number = number + 1
+
 ##
 ##def main():
 ##    numberList(['red', 'orange', 'yellow', 'green'])
