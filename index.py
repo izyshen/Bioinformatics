@@ -26,38 +26,38 @@ print (first_mRNA)
 ##    print (mRNA_excess[position:(position+3)])
 ##    position = position + 3
     
-#produces entire mRNA
+#produces mRNA from start
 def mRNA_start (DNAseq, position):
     DNAseq[(DNAseq.find(METcodon)):]
-def mRNA_producer1 (mRNA_start, position):
-    print (mRNA_start[:(3 + (mRNA_start.find(stopcodon1 or stopcodon2 or stopcodon3)))])
-    
+#produces mRNA from start to stop
 def mRNA_producer (DNAseq, position):
     if DNAseq[0:3]:
             print "START"
-    while position < len(DNAseq) - 2:
-        if DNAseq[position:(position + 3)] == METcodon:
-            while position < len(DNAseq):
-                if DNAseq[position:(position + 3)] == (stopcodon1 or stopcodon2 or stopcodon3):
-                    print "STOP"
+            position = position + 3
+            while position < len(DNAseq) - 2:
+                if DNAseq[position:(position + 3)] == METcodon:
+                    while position < len(DNAseq):
+                        if DNAseq[position:(position + 3)] == (stopcodon1 or stopcodon2 or stopcodon3):
+                            print "STOP"
+                            position = len(DNAseq)
+                        else: print DNAseq[position:(position + 3)]
+                        position = position + 3
                     position = len(DNAseq)
-                else: print DNAseq[position:(position + 3)]
-                position = position + 3
-            position = len(DNAseq)
-        elif position == len(DNAseq) - 3 and DNAseq[position:] != METcodon:
-            print "No ORF"
-            position = len(DNAseq)
-        else: position = position + 1
-    
+                elif position == len(DNAseq) - 3 and DNAseq[position:] != METcodon:
+                    print "No ORF"
+                    position = len(DNAseq)
+                else: position = position + 1
+print mRNA_producer(SFTPA1, 0)
+
 ##    while position < len(DNAseq) - 2:
 ##        if (DNAseq[position:(position + 3)]) == METcodon:
 ##            print "START"
 ##            position = position + 3
 ##        else: mRNA_producer (DNAseq, position+3)
 
-##only half of polypeptide produced 
+##only half of polypeptide produced, does not search for mRNA start
 def polypeptide_producer (DNAseq, position):
-    while position < len(DNAseq):
+    while position < len(DNAseq) - 2:
         if DNAseq[position:(position+3)] == "TTT" or DNAseq[position:(position + 3)] == "TTC":
             print ("Phe")
             position = position + 3    
@@ -68,8 +68,12 @@ def polypeptide_producer (DNAseq, position):
             print ("Ile")
             position = position + 3
         if DNAseq[position:(position+3)] == "ATG":
-            print ("START")
-            position = position + 3 
+            if DNAseq[position:(position+3)] == DNAseq[0:3]:
+                print ("START")
+                position = position + 3 
+            else:
+                print "MET"
+                position = position + 3 
         if DNAseq[position:(position+3)] == "GTT" or DNAseq[position:(position+3)] == "GTC" or DNAseq[position:(position+3)] == "GTA" or DNAseq[position:(position+3)] == "GTG":
             print ("Val")
             position = position + 3     

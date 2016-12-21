@@ -9,7 +9,6 @@ METcodon = "ATG"
 stopcodon1 = "TAA"
 stopcodon2 = "TAG"
 stopcodon3 = "TGA"
-##position = 0
 
 ##while position < len(DNAseq) - 2:
 ##    if DNAseq[position:(position + 3)] == "ATG":
@@ -25,24 +24,25 @@ stopcodon3 = "TGA"
 ## while loops
 ## requires function to have a stopcodon in frame to terminate    
 def mRNA_producer (DNAseq, position):
-    if DNAseq[0:3] == "ATG":
-        print "START"
-        position = position + 3
-        while position < len(DNAseq) - 2:
-            if DNAseq[position:(position + 3)] == METcodon:
-                while position < len(DNAseq):
-                    if DNAseq[position:(position + 3)] == (stopcodon1 or stopcodon2 or stopcodon3):
-                        print "STOP"
-                        position = len(DNAseq)
-                    else:
-                        print DNAseq[position:(position + 3)]
-                        position = position + 3
-                position = len(DNAseq)
-    elif position == len(DNAseq) - 3 and DNAseq[position:] != METcodon:
-        print "No ORF"
-        position = len(DNAseq)
-    else:
-        position = position + 1
+    while position < len(DNAseq) - 2:
+        if DNAseq[0:3] == "ATG":
+            print "START"
+            position = position + 3
+            while position < len(DNAseq) - 2:
+                if DNAseq[position:(position + 3)] == METcodon:
+                    while position < len(DNAseq):
+                        if DNAseq[position:(position + 3)] == (stopcodon1 or stopcodon2 or stopcodon3):
+                            print "STOP"
+                            position = len(DNAseq)
+                        else:
+                            print DNAseq[position:(position + 3)]
+                            position = position + 3
+                    position = len(DNAseq)
+##        elif position == len(DNAseq) - 3 and DNAseq[position:] != METcodon:
+##            print "No ORF"
+##            position = len(DNAseq)
+        else:
+            position = position + 1
 
 def polypeptide_producer (DNAseq, position):
     mRNAseq = mRNA_producer(DNAseq, 0)
@@ -137,14 +137,15 @@ def lister (DNAseq, position):
 ##    for val in nums:
 ##        print val*3
 ##        
-n = int(input('Enter the number of times to repeat: '))
-for i in range(n):
-    print('This is repetitious!')
-
-n = str(input('This is a test: '))
-for i in range(n):
-    print codon#print codons using input
-    #learn for loops first
+######################n = int(input('Enter the number of times to repeat: '))
+######################for i in range(n):
+######################    print('This is repetitious!')
+######################
+######################n = str(input('This is a test: '))
+######################for codon in range(n):
+######################    print codon#print codons using input
+######################    #learn for loops first
+    
 ##
 ##def numberList(items):
 ##    number = 1
@@ -154,9 +155,11 @@ for i in range(n):
 
 def codonlist(dnaseq):
     number = 1
+    codon = dnaseq[position:positio+3]
     for codon in dnaseq:
         print (number, codon)
         number = number + 1
+        position = position + 3
 
 ##
 ##def main():
