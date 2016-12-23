@@ -37,7 +37,7 @@ def mRNA_producer (DNAseq, position):
             while position < len(DNAseq) - 2:
                 if DNAseq[position:(position + 3)] == METcodon:
                     while position < len(DNAseq):
-                        if DNAseq[position:(position + 3)] == (stopcodon1 or stopcodon2 or stopcodon3):
+                        if DNAseq[position:(position + 3)] == stopcodon1 or DNAseq[position:(position + 3)] == stopcodon2 or DNAseq[position:(position + 3)] == stopcodon3:
                             print "STOP"
                             position = len(DNAseq)
                         else: print DNAseq[position:(position + 3)]
@@ -47,8 +47,31 @@ def mRNA_producer (DNAseq, position):
                     print "No ORF"
                     position = len(DNAseq)
                 else: position = position + 1
-print mRNA_producer(SFTPA1, 0)
 
+#produces mRNA from start to stop as a list
+
+mRNA = []
+
+def mRNA_producer2 (DNAseq, position):
+    while position < len(DNAseq):
+        if DNAseq[position:position+3] == "ATG":
+            mRNA.append("START")
+            position = position + 3
+            while position < len(DNAseq) - 2:
+                if DNAseq[position:(position + 3)] == stopcodon1 or DNAseq[position:(position + 3)] == stopcodon2 or DNAseq[position:(position + 3)] == stopcodon3:
+                    mRNA.append("STOP")
+                    print mRNA
+                    position = len(DNAseq)
+                else:
+                    mRNA.append(DNAseq[position:(position + 3)])
+                    position = position + 3
+            position = len(DNAseq)
+        elif position == len(DNAseq) - 2:
+            print "No ORF"
+            position = len(DNAseq)
+        else:
+            position = position + 1
+            
 ##    while position < len(DNAseq) - 2:
 ##        if (DNAseq[position:(position + 3)]) == METcodon:
 ##            print "START"
