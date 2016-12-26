@@ -71,83 +71,84 @@ def mRNA_producer2 (DNAseq, position):
             position = len(DNAseq)
         else:
             position = position + 1
-            
-##    while position < len(DNAseq) - 2:
-##        if (DNAseq[position:(position + 3)]) == METcodon:
-##            print "START"
-##            position = position + 3
-##        else: mRNA_producer (DNAseq, position+3)
 
-##only half of polypeptide produced, does not search for mRNA start
-def polypeptide_producer (DNAseq, position):
-    while position < len(DNAseq) - 2:
-        if DNAseq[position:(position+3)] == "TTT" or DNAseq[position:(position + 3)] == "TTC":
-            print ("Phe")
-            position = position + 3    
-        if DNAseq[position:(position+3)] == "TTA" or DNAseq[position:(position+3)] == "TTG" or DNAseq[position:(position+3)] == "CTT" or DNAseq[position:(position+3)] == "CTC" or DNAseq[position:(position+3)] == "CTA" or DNAseq[position:(position+3)] == "CTG":
-            print ("Leu")
-            position = position + 3    
-        if DNAseq[position:(position+3)] == "ATT" or DNAseq[position:(position+3)] == "ATC" or DNAseq[position:(position+3)] == "ATA":
-            print ("Ile")
-            position = position + 3
-        if DNAseq[position:(position+3)] == "ATG":
-            if DNAseq[position:(position+3)] == DNAseq[0:3]:
-                print ("START")
-                position = position + 3 
-            else:
-                print "MET"
-                position = position + 3 
-        if DNAseq[position:(position+3)] == "GTT" or DNAseq[position:(position+3)] == "GTC" or DNAseq[position:(position+3)] == "GTA" or DNAseq[position:(position+3)] == "GTG":
-            print ("Val")
-            position = position + 3     
-        if DNAseq[position:(position+3)] == "TCT" or DNAseq[position:(position+3)] == "TCC" or DNAseq[position:(position+3)] == "TCA" or DNAseq[position:(position+3)] == "TCG" or DNAseq[position:(position+3)] == "AGT" or DNAseq[position:(position+3)] == "AGC":
-            print ("Ser")
-            position = position + 3 
-        if DNAseq[position:(position+3)] == "CCT" or DNAseq[position:(position+3)] == "CCC" or DNAseq[position:(position+3)] == "CCA" or DNAseq[position:(position+3)] == "CCG":
-            print ("Pro")
-            position = position + 3 
-        if DNAseq[position:(position+3)] == "ACT" or DNAseq[position:(position+3)] == "ACC" or DNAseq[position:(position+3)] == "ACA" or DNAseq[position:(position+3)] == "ACG":
-            print ("Thr")
-            position = position + 3 
-        if DNAseq[position:(position+3)] == "GCT" or DNAseq[position:(position+3)] == "GCC" or DNAseq[position:(position+3)] == "GCA" or DNAseq[position:(position+3)] == "GCG":
-            print ("Ala")
-            position = position + 3 
-        if DNAseq[position:(position+3)] == "TAT" or DNAseq[position:(position+3)] == "TAC":
-            print ("Tyr")
-            position = position + 3 
-        if DNAseq[position:(position+3)] == "CAT" or DNAseq[position:(position+3)] == "CAC":
-            print ("His")
-            position = position + 3 
-        if DNAseq[position:(position+3)] == "CAA" or DNAseq[position:(position+3)] == "CAG":
-            print ("Gln")
-            position = position + 3 
-        if DNAseq[position:(position+3)] == "AAT" or DNAseq[position:(position+3)] == "AAC":
-            print ("Asn")
-            position = position + 3 
-        if DNAseq[position:(position+3)] == "AAA" or DNAseq[position:(position+3)] == "AAG":
-            print ("Lys")
-            position = position + 3 
-        if DNAseq[position:(position+3)] == "GAT" or DNAseq[position:(position+3)] == "GAC":
-            print ("Asp")
-            position = position + 3 
-        if DNAseq[position:(position+3)] == "GAA" or DNAseq[position:(position+3)] == "GAG":
-            print ("Glu")
-            position = position + 3 
-        if DNAseq[position:(position+3)] == "TGT" or DNAseq[position:(position+3)] == "TGC":
-            print ("Cys")
-            position = position + 3 
-        if DNAseq[position:(position+3)] == "TGG":
-            print ("Trp")
-            position = position + 3 
-        if DNAseq[position:(position+3)] == "CGT" or DNAseq[position:(position+3)] == "CGC" or DNAseq[position:(position+3)] == "CGA" or DNAseq[position:(position+3)] == "CGG" or DNAseq[position:(position+3)] == "AGA" or DNAseq[position:(position+3)] == "AGG":
-            print ("Arg")
-            position = position + 3 
-        if DNAseq[position:(position+3)] == "GGT" or DNAseq[position:(position+3)] == "GGC" or DNAseq[position:(position+3)] == "GGA" or DNAseq[position:(position+3)] == "GGG":
-            print ("Gly")
-            position = position + 3 
-        if DNAseq[position:(position+3)] == "TAA" or DNAseq[position:(position+3)] == "TAG" or DNAseq[position:(position+3)] == "UGA":
-            print ("STOP")
-            position = position + 3
+polypeptide = []
+
+def polypeptide_producer(mRNAseq, position):
+    while position < len(mRNAseq):
+        if mRNAseq[position:(position+1)] == ['TTT'] or mRNAseq[position:(position+1)] == ['TTC']:
+            polypeptide.append("Phe")
+            position = position + 1
+        elif mRNAseq[position:(position+1)] == ['START']:
+            polypeptide.append("START")
+            position = position + 1            
+        elif mRNAseq[position:(position+1)] == ['ATG']:
+            polypeptide.append("MET")
+            position = position + 1            
+        elif mRNAseq[position:(position+1)] == ['TTA'] or mRNAseq[position:(position+1)] == ['TTG'] or mRNAseq[position:(position+1)] == ['CTT'] or mRNAseq[position:(position+1)] == ['CTC'] or mRNAseq[position:(position+1)] == ['CTA'] or mRNAseq[position:(position+1)] == ['CTG']:
+            polypeptide.append("Leu")
+            position = position + 1    
+        elif mRNAseq[position:(position+1)] == ['ATT'] or mRNAseq[position:(position+1)] == ['ATC'] or mRNAseq[position:(position+1)] == ['ATA']:
+            polypeptide.append ("Ile")
+            position = position + 1
+        elif mRNAseq[position:(position+1)] == ['GTT'] or mRNAseq[position:(position+1)] == ['GTC'] or mRNAseq[position:(position+1)] == ['GTA'] or mRNAseq[position:(position+1)] == ['GTG']:
+            polypeptide.append ("Val")
+            position = position + 1     
+        elif mRNAseq[position:(position+1)] == ['TCT'] or mRNAseq[position:(position+1)] == ['TCC'] or mRNAseq[position:(position+1)] == ['TCA'] or mRNAseq[position:(position+1)] == ['TCG'] or mRNAseq[position:(position+1)] == ['AGT'] or mRNAseq[position:(position+1)] == ['AGC']:
+            polypeptide.append ("Ser")
+            position = position + 1 
+        elif mRNAseq[position:(position+1)] == ['CCT'] or mRNAseq[position:(position+1)] == ['CCC'] or mRNAseq[position:(position+1)] == ['CCA'] or mRNAseq[position:(position+1)] == ['CCG']:
+            polypeptide.append ("Pro")
+            position = position + 1 
+        elif mRNAseq[position:(position+1)] == ['ACT'] or mRNAseq[position:(position+1)] == ['ACC'] or mRNAseq[position:(position+1)] == ['ACA'] or mRNAseq[position:(position+1)] == ['ACG']:
+            polypeptide.append ("Thr")
+            position = position + 1 
+        elif mRNAseq[position:(position+1)] == ['GCT'] or mRNAseq[position:(position+1)] == ['GCC'] or mRNAseq[position:(position+1)] == ['GCA'] or mRNAseq[position:(position+1)] == ['GCG']:
+            polypeptide.append ("Ala")
+            position = position + 1 
+        elif mRNAseq[position:(position+1)] == ['TAT'] or mRNAseq[position:(position+1)] == ['TAC']:
+            polypeptide.append ("Tyr")
+            position = position + 1 
+        elif mRNAseq[position:(position+1)] == ['CAT'] or mRNAseq[position:(position+1)] == ['CAC']:
+            polypeptide.append ("His")
+            position = position + 1 
+        elif mRNAseq[position:(position+1)] == ['CAA'] or mRNAseq[position:(position+1)] == ['CAG']:
+            polypeptide.append ("Gln")
+            position = position + 1 
+        elif mRNAseq[position:(position+1)] == ['AAT'] or mRNAseq[position:(position+1)] == ['AAC']:
+            polypeptide.append ("Asn")
+            position = position + 1 
+        elif mRNAseq[position:(position+1)] == ['AAA'] or mRNAseq[position:(position+1)] == ['AAG']:
+            polypeptide.append ("Lys")
+            position = position + 1 
+        elif mRNAseq[position:(position+1)] == ['GAT'] or mRNAseq[position:(position+1)] == ['GAC']:
+            polypeptide.append ("Asp")
+            position = position + 1 
+        elif mRNAseq[position:(position+1)] == ['GAA'] or mRNAseq[position:(position+1)] == ['GAG']:
+            polypeptide.append ("Glu")
+            position = position + 1 
+        elif mRNAseq[position:(position+1)] == ['TGT'] or mRNAseq[position:(position+1)] == ['TGC']:
+            polypeptide.append ("Cys")
+            position = position + 1 
+        elif mRNAseq[position:(position+1)] == ['TGG']:
+            polypeptide.append ("Trp")
+            position = position + 1 
+        elif mRNAseq[position:(position+1)] == ['CGT'] or mRNAseq[position:(position+1)] == ['CGC'] or mRNAseq[position:(position+1)] == ['CGA'] or mRNAseq[position:(position+1)] == ['CGG'] or mRNAseq[position:(position+1)] == ['AGA'] or mRNAseq[position:(position+1)] == ['AGG']:
+            polypeptide.append ("Arg")
+            position = position + 1 
+        elif mRNAseq[position:(position+1)] == ['GGT'] or mRNAseq[position:(position+1)] == ['GGC'] or mRNAseq[position:(position+1)] == ['GGA'] or mRNAseq[position:(position+1)] == ['GGG']:
+            polypeptide.append ("Gly")
+            position = position + 1 
+        elif mRNAseq[position:(position+1)] == ['STOP']:
+            polypeptide.append ("STOP")
+            print polypeptide
+            position = len(mRNAseq)
+        else:
+            polypeptide.append("What the hell went wrong?")
+            print polypeptide
+            position = len(mRNAseq)
+
+
 
 
 ##number_AA = ((len(first_mRNA))/3)
