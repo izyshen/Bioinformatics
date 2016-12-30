@@ -120,10 +120,8 @@ def polypeptide_producer(mRNAseq):
             polypeptide.append ("Gly")
         elif codon == 'STOP':
             polypeptide.append ("STOP")
-            print polypeptide
         else:
             polypeptide.append("What the hell went wrong?")
-            print polypeptide
 
 start_codons = []
 def start_posns(DNAseq, position):
@@ -141,8 +139,8 @@ def multiple_mRNA(DNAseq, start_posns):
     count = 0
     for posn in start_posns:
         count = count + 1
-        print "mRNA" + (str(count))
         mRNA_producer2(DNAseq, posn)
+        print "mRNA" + (str(count)) + ":" + (str(mRNA))
 
 ##make a dictionary with this
 ##see what's longer than 100 AA
@@ -150,4 +148,8 @@ def multiple_mRNA(DNAseq, start_posns):
 DNAsequence = str(raw_input("Input DNA sequence:"))
 mRNAinput = mRNA_producer(DNAsequence, 0)
 polypeptide_producer(mRNA)
+
+DNAsequence = str(raw_input("Input DNA sequence to produce multiple mRNA: "))
+start = start_posns(DNAsequence, 0)
+multiple_mRNA(DNAsequence, start)
 
