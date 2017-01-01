@@ -52,16 +52,18 @@ def mRNA_producer (DNAseq, position):
             
 ## list produced inside fcn, for production of polycistronic mRNA strands
 def mRNA_producer2 (DNAseq, position):
-    mRNA = []
     while position < len(DNAseq):
         if DNAseq[position:position+3] == "ATG":
             mRNA.append("START")
             position = position + 3
-            while position < len(DNAseq) - 2:
+            while position <= len(DNAseq):
                 if DNAseq[position:(position + 3)] == stopcodon1 or DNAseq[position:(position + 3)] == stopcodon2 or DNAseq[position:(position + 3)] == stopcodon3:
                     mRNA.append("STOP")
                     print mRNA
-                    position = len(DNAseq)
+                    break
+                elif position == len(DNAseq) - 2 or position == len(DNAseq) - 1 or position == len(DNAseq):
+                    print "no stop codon"
+                    break
                 else:
                     mRNA.append(DNAseq[position:(position + 3)])
                     position = position + 3
@@ -139,8 +141,10 @@ def multiple_mRNA(DNAseq, start_posns):
     count = 0
     for posn in start_posns:
         count = count + 1
+        mRNA = []
+        print "mRNA" + (str(count)) + ":"
         mRNA_producer2(DNAseq, posn)
-        print "mRNA" + (str(count)) + ":" + (str(mRNA))
+
 
 ##make a dictionary with this
 ##see what's longer than 100 AA
@@ -148,8 +152,9 @@ def multiple_mRNA(DNAseq, start_posns):
 DNAsequence = str(raw_input("Input DNA sequence:"))
 mRNAinput = mRNA_producer(DNAsequence, 0)
 polypeptide_producer(mRNA)
+print polypeptide
 
 DNAsequence = str(raw_input("Input DNA sequence to produce multiple mRNA: "))
 start = start_posns(DNAsequence, 0)
-multiple_mRNA(DNAsequence, start)
+multiple_mRNA(DNAsequence, start_codons)
 
