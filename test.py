@@ -73,6 +73,29 @@ def mRNA_producer2 (DNAseq, position):
             position = len(DNAseq)
         else:
             position = position + 1
+
+def mRNA_producer3 (DNAseq, position, lst):
+    while position < len(DNAseq):
+        if DNAseq[position:position+3] == "ATG":
+            lst.append("START")
+            position = position + 3
+            while position <= len(DNAseq):
+                if DNAseq[position:(position + 3)] == stopcodon1 or DNAseq[position:(position + 3)] == stopcodon2 or DNAseq[position:(position + 3)] == stopcodon3:
+                    lst.append("STOP")
+                    print mRNA
+                    break
+                elif position == len(DNAseq) - 2 or position == len(DNAseq) - 1 or position == len(DNAseq):
+                    print "no stop codon"
+                    break
+                else:
+                    lst.append(DNAseq[position:(position + 3)])
+                    position = position + 3
+            position = len(DNAseq)
+        elif position == len(DNAseq) - 2:
+            print "No ORF"
+            position = len(DNAseq)
+        else:
+            position = position + 1
             
 # using for loop
 polypeptide = []
@@ -137,16 +160,23 @@ def start_posns(DNAseq, position):
         else:
             position = position + 1
 
-def multiple_mRNA(DNAseq, start_posns):
+##def multiple_mRNA(DNAseq, start_posns):
+##    count = 0
+##    for posn in start_posns:
+##        count = count + 1
+##        mRNA = []
+##        print "mRNA" + (str(count)) + ":"
+##        mRNA_producer2(DNAseq, posn)
+
+def multiple_mRNA(DNAseq, start_posns, lst):
     count = 0
     for posn in start_posns:
         count = count + 1
-        mRNA = []
         print "mRNA" + (str(count)) + ":"
-        mRNA_producer2(DNAseq, posn)
+        mRNA_producer3(DNAseq, posn, lst)
 
 
-##make a dictionary with this
+##make a dictionary with this, key and value
 ##see what's longer than 100 AA
         
 DNAsequence = str(raw_input("Input DNA sequence:"))
@@ -154,7 +184,17 @@ mRNAinput = mRNA_producer(DNAsequence, 0)
 polypeptide_producer(mRNA)
 print polypeptide
 
+##DNAsequence = str(raw_input("Input DNA sequence to produce multiple mRNA: "))
+##start = start_posns(DNAsequence, 0)
+##multiple_mRNA(DNAsequence, start_codons)
+
 DNAsequence = str(raw_input("Input DNA sequence to produce multiple mRNA: "))
 start = start_posns(DNAsequence, 0)
-multiple_mRNA(DNAsequence, start_codons)
+multiple_mRNA(DNAsequence, start_codons, [])
 
+def fcn_test(los, s):
+    if s == "hello":
+        los.append(s)
+        print los
+    else:
+        print los
