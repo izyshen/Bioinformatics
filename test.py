@@ -82,7 +82,7 @@ def mRNA_producer3 (DNAseq, position, lst):
             while position <= len(DNAseq):
                 if DNAseq[position:(position + 3)] == stopcodon1 or DNAseq[position:(position + 3)] == stopcodon2 or DNAseq[position:(position + 3)] == stopcodon3:
                     lst.append("STOP")
-                    print mRNA
+                    print lst
                     break
                 elif position == len(DNAseq) - 2 or position == len(DNAseq) - 1 or position == len(DNAseq):
                     print "no stop codon"
@@ -145,6 +145,7 @@ def polypeptide_producer(mRNAseq):
             polypeptide.append ("Gly")
         elif codon == 'STOP':
             polypeptide.append ("STOP")
+            print polypeptide
         else:
             polypeptide.append("What the hell went wrong?")
 
@@ -160,19 +161,19 @@ def start_posns(DNAseq, position):
         else:
             position = position + 1
 
-##def multiple_mRNA(DNAseq, start_posns):
-##    count = 0
-##    for posn in start_posns:
-##        count = count + 1
-##        mRNA = []
-##        print "mRNA" + (str(count)) + ":"
-##        mRNA_producer2(DNAseq, posn)
-
-def multiple_mRNA(DNAseq, start_posns, lst):
+def multiple_mRNA(DNAseq, start_posns):
     count = 0
     for posn in start_posns:
         count = count + 1
-        print "mRNA" + (str(count)) + ":"
+        mRNA = []
+        print "mRNA" + (str(count)) + ":", 
+        mRNA_producer2(DNAseq, posn)
+
+def multiple_mRNA2(DNAseq, start_posns, lst):
+    count = 0
+    for posn in start_posns:
+        count = count + 1
+        print "mRNA" + (str(count)) + ":", 
         mRNA_producer3(DNAseq, posn, lst)
 
 
@@ -180,17 +181,17 @@ def multiple_mRNA(DNAseq, start_posns, lst):
 ##see what's longer than 100 AA
         
 DNAsequence = str(raw_input("Input DNA sequence:"))
-mRNAinput = mRNA_producer(DNAsequence, 0)
+mRNA_producer(DNAsequence, 0)
 polypeptide_producer(mRNA)
-print polypeptide
+
 
 ##DNAsequence = str(raw_input("Input DNA sequence to produce multiple mRNA: "))
 ##start = start_posns(DNAsequence, 0)
 ##multiple_mRNA(DNAsequence, start_codons)
 
 DNAsequence = str(raw_input("Input DNA sequence to produce multiple mRNA: "))
-start = start_posns(DNAsequence, 0)
-multiple_mRNA(DNAsequence, start_codons, [])
+start_posns(DNAsequence, 0)
+multiple_mRNA2(DNAsequence, start_codons, [])
 
 def fcn_test(los, s):
     if s == "hello":
