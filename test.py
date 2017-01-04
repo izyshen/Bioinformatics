@@ -199,3 +199,10 @@ def fcn_test(los, s):
         print los
     else:
         print los
+
+
+# Dictionary
+mRNAdic = {}
+for start in start_codons:
+    mRNAdic = dict([mRNA_counter, mRNA1) #need mRNA_counter fcn
+    dict([(print "mRNA1", mRNA1), (print "mRNA2", mRNA2), (print "mRNA3", mRNA3)])
