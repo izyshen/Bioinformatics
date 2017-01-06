@@ -30,38 +30,39 @@ print (first_mRNA)
 def mRNA_start (DNAseq, position):
     DNAseq[(DNAseq.find(METcodon)):]
 #produces mRNA from start to stop
-def mRNA_producer (DNAseq, position):
-    if DNAseq[0:3]:
-            print "START"
-            position = position + 3
-            while position < len(DNAseq) - 2:
-                if DNAseq[position:(position + 3)] == METcodon:
-                    while position < len(DNAseq):
-                        if DNAseq[position:(position + 3)] == stopcodon1 or DNAseq[position:(position + 3)] == stopcodon2 or DNAseq[position:(position + 3)] == stopcodon3:
-                            print "STOP"
-                            position = len(DNAseq)
-                        else: print DNAseq[position:(position + 3)]
-                        position = position + 3
-                    position = len(DNAseq)
-                elif position == len(DNAseq) - 3 and DNAseq[position:] != METcodon:
-                    print "No ORF"
-                    position = len(DNAseq)
-                else: position = position + 1
+##def mRNA_producer (DNAseq, position):
+##    if DNAseq[0:3]:
+##            print "START"
+##            position = position + 3
+##            while position < len(DNAseq) - 2:
+##                if DNAseq[position:(position + 3)] == METcodon:
+##                    while position < len(DNAseq):
+##                        if DNAseq[position:(position + 3)] == stopcodon1 or DNAseq[position:(position + 3)] == stopcodon2 or DNAseq[position:(position + 3)] == stopcodon3:
+##                            print "STOP"
+##                            position = len(DNAseq)
+##                        else: print DNAseq[position:(position + 3)]
+##                        position = position + 3
+##                    position = len(DNAseq)
+##                elif position == len(DNAseq) - 3 and DNAseq[position:] != METcodon:
+##                    print "No ORF"
+##                    position = len(DNAseq)
+##                else: position = position + 1
 
 #produces mRNA from start to stop as a list
-
 mRNA = []
-
-def mRNA_producer2 (DNAseq, position):
+def mRNA_producer (DNAseq, position):
     while position < len(DNAseq):
         if DNAseq[position:position+3] == "ATG":
             mRNA.append("START")
             position = position + 3
-            while position < len(DNAseq) - 2:
+            while position <= len(DNAseq):
                 if DNAseq[position:(position + 3)] == stopcodon1 or DNAseq[position:(position + 3)] == stopcodon2 or DNAseq[position:(position + 3)] == stopcodon3:
                     mRNA.append("STOP")
                     print mRNA
-                    position = len(DNAseq)
+                    break
+                elif position == len(DNAseq) - 2 or position == len(DNAseq) - 1 or position == len(DNAseq):
+                    print "no stop codon"
+                    break
                 else:
                     mRNA.append(DNAseq[position:(position + 3)])
                     position = position + 3
@@ -73,92 +74,70 @@ def mRNA_producer2 (DNAseq, position):
             position = position + 1
 
 polypeptide = []
-
-def polypeptide_producer(mRNAseq, position):
-    while position < len(mRNAseq):
-        if mRNAseq[position:(position+1)] == ['TTT'] or mRNAseq[position:(position+1)] == ['TTC']:
+def polypeptide_producer(mRNAseq):
+    for codon in mRNAseq:
+        if codon == 'TTT' or codon == 'TTC':
             polypeptide.append("Phe")
-            position = position + 1
-        elif mRNAseq[position:(position+1)] == ['START']:
-            polypeptide.append("START")
-            position = position + 1            
-        elif mRNAseq[position:(position+1)] == ['ATG']:
-            polypeptide.append("MET")
-            position = position + 1            
-        elif mRNAseq[position:(position+1)] == ['TTA'] or mRNAseq[position:(position+1)] == ['TTG'] or mRNAseq[position:(position+1)] == ['CTT'] or mRNAseq[position:(position+1)] == ['CTC'] or mRNAseq[position:(position+1)] == ['CTA'] or mRNAseq[position:(position+1)] == ['CTG']:
-            polypeptide.append("Leu")
-            position = position + 1    
-        elif mRNAseq[position:(position+1)] == ['ATT'] or mRNAseq[position:(position+1)] == ['ATC'] or mRNAseq[position:(position+1)] == ['ATA']:
+        elif codon == 'START':
+            polypeptide.append("START")       
+        elif codon == 'ATG':
+            polypeptide.append("MET")        
+        elif codon == 'TTA' or codon == 'TTG' or codon == 'CTT' or codon == 'CTC' or codon == 'CTA' or codon == 'CTG':
+            polypeptide.append("Leu")  
+        elif codon == 'ATT' or codon == 'ATC' or codon == 'ATA':
             polypeptide.append ("Ile")
-            position = position + 1
-        elif mRNAseq[position:(position+1)] == ['GTT'] or mRNAseq[position:(position+1)] == ['GTC'] or mRNAseq[position:(position+1)] == ['GTA'] or mRNAseq[position:(position+1)] == ['GTG']:
-            polypeptide.append ("Val")
-            position = position + 1     
-        elif mRNAseq[position:(position+1)] == ['TCT'] or mRNAseq[position:(position+1)] == ['TCC'] or mRNAseq[position:(position+1)] == ['TCA'] or mRNAseq[position:(position+1)] == ['TCG'] or mRNAseq[position:(position+1)] == ['AGT'] or mRNAseq[position:(position+1)] == ['AGC']:
+        elif codon == 'GTT' or codon == 'GTC' or codon == 'GTA' or codon == 'GTG':
+            polypeptide.append ("Val") 
+        elif codon == 'TCT' or codon == 'TCC' or codon == 'TCA' or codon == 'TCG' or codon == 'AGT' or codon == 'AGC':
             polypeptide.append ("Ser")
-            position = position + 1 
-        elif mRNAseq[position:(position+1)] == ['CCT'] or mRNAseq[position:(position+1)] == ['CCC'] or mRNAseq[position:(position+1)] == ['CCA'] or mRNAseq[position:(position+1)] == ['CCG']:
+        elif codon == 'CCT' or codon == 'CCC' or codon == 'CCA' or codon == 'CCG':
             polypeptide.append ("Pro")
-            position = position + 1 
-        elif mRNAseq[position:(position+1)] == ['ACT'] or mRNAseq[position:(position+1)] == ['ACC'] or mRNAseq[position:(position+1)] == ['ACA'] or mRNAseq[position:(position+1)] == ['ACG']:
+        elif codon == 'ACT' or codon == 'ACC' or codon == 'ACA' or codon == 'ACG':
             polypeptide.append ("Thr")
-            position = position + 1 
-        elif mRNAseq[position:(position+1)] == ['GCT'] or mRNAseq[position:(position+1)] == ['GCC'] or mRNAseq[position:(position+1)] == ['GCA'] or mRNAseq[position:(position+1)] == ['GCG']:
+        elif codon == 'GCT' or codon == 'GCC' or codon == 'GCA' or codon == 'GCG':
             polypeptide.append ("Ala")
-            position = position + 1 
-        elif mRNAseq[position:(position+1)] == ['TAT'] or mRNAseq[position:(position+1)] == ['TAC']:
+        elif codon == 'TAT' or codon == 'TAC':
             polypeptide.append ("Tyr")
-            position = position + 1 
-        elif mRNAseq[position:(position+1)] == ['CAT'] or mRNAseq[position:(position+1)] == ['CAC']:
+        elif codon == 'CAT' or codon == 'CAC':
             polypeptide.append ("His")
-            position = position + 1 
-        elif mRNAseq[position:(position+1)] == ['CAA'] or mRNAseq[position:(position+1)] == ['CAG']:
+        elif codon == 'CAA' or codon == 'CAG':
             polypeptide.append ("Gln")
-            position = position + 1 
-        elif mRNAseq[position:(position+1)] == ['AAT'] or mRNAseq[position:(position+1)] == ['AAC']:
+        elif codon == 'AAT' or codon == 'AAC':
             polypeptide.append ("Asn")
-            position = position + 1 
-        elif mRNAseq[position:(position+1)] == ['AAA'] or mRNAseq[position:(position+1)] == ['AAG']:
+        elif codon == 'AAA' or codon == 'AAG':
             polypeptide.append ("Lys")
-            position = position + 1 
-        elif mRNAseq[position:(position+1)] == ['GAT'] or mRNAseq[position:(position+1)] == ['GAC']:
+        elif codon == 'GAT' or codon == 'GAC':
             polypeptide.append ("Asp")
-            position = position + 1 
-        elif mRNAseq[position:(position+1)] == ['GAA'] or mRNAseq[position:(position+1)] == ['GAG']:
+        elif codon == 'GAA' or codon == 'GAG':
             polypeptide.append ("Glu")
-            position = position + 1 
-        elif mRNAseq[position:(position+1)] == ['TGT'] or mRNAseq[position:(position+1)] == ['TGC']:
+        elif codon == 'TGT' or codon == 'TGC':
             polypeptide.append ("Cys")
-            position = position + 1 
-        elif mRNAseq[position:(position+1)] == ['TGG']:
+        elif codon == 'TGG':
             polypeptide.append ("Trp")
-            position = position + 1 
-        elif mRNAseq[position:(position+1)] == ['CGT'] or mRNAseq[position:(position+1)] == ['CGC'] or mRNAseq[position:(position+1)] == ['CGA'] or mRNAseq[position:(position+1)] == ['CGG'] or mRNAseq[position:(position+1)] == ['AGA'] or mRNAseq[position:(position+1)] == ['AGG']:
+        elif codon == 'CGT' or codon == 'CGC' or codon == 'CGA' or codon == 'CGG' or codon == 'AGA' or codon == 'AGG':
             polypeptide.append ("Arg")
-            position = position + 1 
-        elif mRNAseq[position:(position+1)] == ['GGT'] or mRNAseq[position:(position+1)] == ['GGC'] or mRNAseq[position:(position+1)] == ['GGA'] or mRNAseq[position:(position+1)] == ['GGG']:
+        elif codon == 'GGT' or codon == 'GGC' or codon == 'GGA' or codon == 'GGG':
             polypeptide.append ("Gly")
-            position = position + 1 
-        elif mRNAseq[position:(position+1)] == ['STOP']:
+        elif codon == 'STOP':
             polypeptide.append ("STOP")
             print polypeptide
-            position = len(mRNAseq)
         else:
             polypeptide.append("What the hell went wrong?")
-            print polypeptide
-            position = len(mRNAseq)
 
+start_codons = []
+def start_posns(DNAseq, position):
+    while position <= len(DNAseq) - 2:
+        if DNAseq[position:position+3] == "ATG":
+            start_codons.append(position)
+            position = position + 3
+        elif position == len(DNAseq) - 2:
+            print start_codons
+            break
+        else:
+            position = position + 1
 
+## produce single (first) mRNA strand
+DNAsequence = str(raw_input("Input DNA sequence:"))
+mRNAinput = mRNA_producer(DNAsequence, 0)
+polypeptide_producer(mRNA)
 
-
-##number_AA = ((len(first_mRNA))/3)
-##aa1 = (first_mRNA[0:3])
-##aa2 = (first_mRNA[3:6])
-##print (aa1)
-##print (aa2)
-
-# n.remove(item)
-    
-# def add_function(x,y):
-    # return x + y
-# print add_function (m, n)
