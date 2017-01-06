@@ -19,39 +19,11 @@ METcodon = "ATG"
 stopcodon1 = "TAA"
 stopcodon2 = "TAG"
 stopcodon3 = "TGA"
-        
-## something is only a coding ORF if it has 100+ amino acids
 
-def lister (DNAseq, position):
-    curr_list = ("start")
-    while len(DNAseq) != 0:
-        print curr_list.extend(DNAseq[position:(position + 3)])
-        position = position+3
-
-## print mRNA codons as a list
+## print mRNA codons as a list  
+## list produced inside fcn, for production of polycistronic mRNA strands
 mRNA = []
 def mRNA_producer (DNAseq, position):
-    while position < len(DNAseq):
-        if DNAseq[position:position+3] == "ATG":
-            mRNA.append("START")
-            position = position + 3
-            while position < len(DNAseq) - 2:
-                if DNAseq[position:(position + 3)] == stopcodon1 or DNAseq[position:(position + 3)] == stopcodon2 or DNAseq[position:(position + 3)] == stopcodon3:
-                    mRNA.append("STOP")
-                    print mRNA
-                    position = len(DNAseq)
-                else:
-                    mRNA.append(DNAseq[position:(position + 3)])
-                    position = position + 3
-            position = len(DNAseq)
-        elif position == len(DNAseq) - 2:
-            print "No ORF"
-            position = len(DNAseq)
-        else:
-            position = position + 1
-            
-## list produced inside fcn, for production of polycistronic mRNA strands
-def mRNA_producer2 (DNAseq, position):
     while position < len(DNAseq):
         if DNAseq[position:position+3] == "ATG":
             mRNA.append("START")
@@ -74,13 +46,13 @@ def mRNA_producer2 (DNAseq, position):
         else:
             position = position + 1
 
-def mRNA_producer3 (DNAseq, position, lst):
+def mRNA_producer2 (DNAseq, position, lst):
     while position < len(DNAseq):
         if DNAseq[position:position+3] == "ATG":
             lst.append("START")
             position = position + 3
             while position <= len(DNAseq):
-                if DNAseq[position:(position + 3)] == stopcodon1 or DNAseq[position:(position + 3)] == stopcodon2 or DNAseq[position:(position + 3)] == stopcodon3:
+                if DNAseq[position:(position + 3)] == (stopcodon1 or stopcodon2 or stopcodon3):
                     lst.append("STOP")
                     print lst
                     break
@@ -97,7 +69,6 @@ def mRNA_producer3 (DNAseq, position, lst):
         else:
             position = position + 1
             
-# using for loop
 polypeptide = []
 def polypeptide_producer(mRNAseq):
     for codon in mRNAseq:
@@ -167,14 +138,14 @@ def multiple_mRNA(DNAseq, start_posns):
         count = count + 1
         mRNA = []
         print "mRNA" + (str(count)) + ":", 
-        mRNA_producer2(DNAseq, posn)
+        mRNA_producer(DNAseq, posn)
 
 def multiple_mRNA2(DNAseq, start_posns, lst):
     count = 0
     for posn in start_posns:
         count = count + 1
         print "mRNA" + (str(count)) + ":", 
-        mRNA_producer3(DNAseq, posn, lst)
+        mRNA_producer2(DNAseq, posn, lst)
 
 
 ##make a dictionary with this, key and value
@@ -202,7 +173,14 @@ def fcn_test(los, s):
 
 
 # Dictionary
-mRNAdic = {}
-for start in start_codons:
-    mRNAdic = dict([mRNA_counter, mRNA1) #need mRNA_counter fcn
-    dict([(print "mRNA1", mRNA1), (print "mRNA2", mRNA2), (print "mRNA3", mRNA3)])
+
+##def mRNAcounter(DNA):
+##    count = 0
+    
+##for item in start_codons:
+##    
+
+##mRNAdic = {}
+##for posn in start_codons:
+##    mRNAdic = dict([mRNA_counter, mRNA]) #need mRNA_counter fcn
+##    dict([("mRNA1", mRNA1), ("mRNA2", mRNA2), ("mRNA3", mRNA3)])
