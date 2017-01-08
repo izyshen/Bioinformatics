@@ -54,71 +54,20 @@ def mRNA_producer2 (DNAseq, position, lst):
             while position <= len(DNAseq):
                 if DNAseq[position:(position + 3)] == (stopcodon1 or stopcodon2 or stopcodon3):
                     lst.append("STOP")
-                    print lst
+                    print (lst)
                     break
                 elif position == len(DNAseq) - 2 or position == len(DNAseq) - 1 or position == len(DNAseq):
-                    print "no stop codon"
+                    print ("no stop codon")
                     break
                 else:
                     lst.append(DNAseq[position:(position + 3)])
                     position = position + 3
             position = len(DNAseq)
         elif position == len(DNAseq) - 2:
-            print "No ORF"
+            print ("No ORF")
             position = len(DNAseq)
         else:
             position = position + 1
-            
-polypeptide = []
-def polypeptide_producer(mRNAseq):
-    for codon in mRNAseq:
-        if codon == 'TTT' or codon == 'TTC':
-            polypeptide.append("Phe")
-        elif codon == 'START':
-            polypeptide.append("START")       
-        elif codon == 'ATG':
-            polypeptide.append("MET")        
-        elif codon == 'TTA' or codon == 'TTG' or codon == 'CTT' or codon == 'CTC' or codon == 'CTA' or codon == 'CTG':
-            polypeptide.append("Leu")  
-        elif codon == 'ATT' or codon == 'ATC' or codon == 'ATA':
-            polypeptide.append ("Ile")
-        elif codon == 'GTT' or codon == 'GTC' or codon == 'GTA' or codon == 'GTG':
-            polypeptide.append ("Val") 
-        elif codon == 'TCT' or codon == 'TCC' or codon == 'TCA' or codon == 'TCG' or codon == 'AGT' or codon == 'AGC':
-            polypeptide.append ("Ser")
-        elif codon == 'CCT' or codon == 'CCC' or codon == 'CCA' or codon == 'CCG':
-            polypeptide.append ("Pro")
-        elif codon == 'ACT' or codon == 'ACC' or codon == 'ACA' or codon == 'ACG':
-            polypeptide.append ("Thr")
-        elif codon == 'GCT' or codon == 'GCC' or codon == 'GCA' or codon == 'GCG':
-            polypeptide.append ("Ala")
-        elif codon == 'TAT' or codon == 'TAC':
-            polypeptide.append ("Tyr")
-        elif codon == 'CAT' or codon == 'CAC':
-            polypeptide.append ("His")
-        elif codon == 'CAA' or codon == 'CAG':
-            polypeptide.append ("Gln")
-        elif codon == 'AAT' or codon == 'AAC':
-            polypeptide.append ("Asn")
-        elif codon == 'AAA' or codon == 'AAG':
-            polypeptide.append ("Lys")
-        elif codon == 'GAT' or codon == 'GAC':
-            polypeptide.append ("Asp")
-        elif codon == 'GAA' or codon == 'GAG':
-            polypeptide.append ("Glu")
-        elif codon == 'TGT' or codon == 'TGC':
-            polypeptide.append ("Cys")
-        elif codon == 'TGG':
-            polypeptide.append ("Trp")
-        elif codon == 'CGT' or codon == 'CGC' or codon == 'CGA' or codon == 'CGG' or codon == 'AGA' or codon == 'AGG':
-            polypeptide.append ("Arg")
-        elif codon == 'GGT' or codon == 'GGC' or codon == 'GGA' or codon == 'GGG':
-            polypeptide.append ("Gly")
-        elif codon == 'STOP':
-            polypeptide.append ("STOP")
-            print polypeptide
-        else:
-            polypeptide.append("What the hell went wrong?")
 
 start_codons = []
 def start_posns(DNAseq, position):
@@ -127,7 +76,7 @@ def start_posns(DNAseq, position):
             start_codons.append(position)
             position = position + 3
         elif position == len(DNAseq) - 2:
-            print start_codons
+            print (start_codons)
             break
         else:
             position = position + 1
@@ -149,7 +98,7 @@ def multiple_mRNA2(DNAseq, start_posns, lst):
     for posn in start_posns:
         lst = []
         count = count + 1
-        print "mRNA" + (str(count)) + ":", 
+        print ("mRNA" + (str(count)) + ":"), 
         mRNA_producer2(DNAseq, posn, lst)
 
 
@@ -182,17 +131,13 @@ def multiple_mRNA3(DNAseq, start_posns, lst):
     for posn in start_posns:
         lst = []
         count = count + 1
-        mRNAlst.append ("mRNA" + (str(count)) + ":")
+##        mRNAlst.append ("mRNA" + (str(count)) + ":")
         mRNAlst.append (mRNA_producer3(DNAseq, posn, lst))
-    print mRNAlst
+    print (mRNAlst)
 
 chair = [1, 10, 45]
 ##make a dictionary with this, key and value
 ##see what's longer than 100 AA
-        
-DNAsequence = str(raw_input("Input DNA sequence:"))
-mRNA_producer(DNAsequence, 0)
-polypeptide_producer(mRNA)
 
 ##DNAsequence = str(raw_input("Input DNA sequence to produce multiple mRNA: "))
 ##start_codons = start_posns(DNAsequence, 0, [])
@@ -202,12 +147,6 @@ polypeptide_producer(mRNA)
 ##start_codons = start_posns(DNAsequence, 0, [])
 ##multiple_mRNA3(DNAsequence, start_codons, [])
 
-def fcn_test(los, s):
-    if s == "hello":
-        los.append(s)
-        print los
-    else:
-        print los
 
 
 # Dictionary
@@ -216,9 +155,19 @@ def fcn_test(los, s):
 ##    count = 0
     
 ##for item in start_codons:
-##    
+##
 
 mRNAdic = {}
+DNAsequence = str(input("Input DNA sequence to produce multiple mRNA: "))
+start_posns(DNAsequence, 0)
+mRNAlst = multiple_mRNA3(DNAsequence, start_codons, [])
+print (mRNAlst[0:1])
+
+##mRNA1 = mRNAlst[0:1]
+##print (mRNA1)
+##mRNAdic['mRNA1'] = mRNA1
+
 for posn in start_codons:
     mRNAdic = dict([mRNA_counter, mRNA]) #need mRNA_counter fcn
     dict([("mRNA1", mRNA1), ("mRNA2", mRNA2), ("mRNA3", mRNA3)])
+    
