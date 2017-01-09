@@ -124,6 +124,7 @@ def mRNA_producer3 (DNAseq, position, lst):
             position = len(DNAseq)
         else:
             position = position + 1
+
             
 def multiple_mRNA3(DNAseq, start_posns, lst):
     count = 0
@@ -132,6 +133,15 @@ def multiple_mRNA3(DNAseq, start_posns, lst):
         lst = []
         count = count + 1
 ##        mRNAlst.append ("mRNA" + (str(count)) + ":")
+        mRNAlst.append (mRNA_producer3(DNAseq, posn, lst))
+    print (mRNAlst)
+
+mRNAlst = []
+def multiple_mRNA4(DNAseq, start_posns):
+    count = 0
+    for posn in start_posns:
+        count = count + 1
+        mRNAlst.append("mRNA" + (str(count)) + ":")
         mRNAlst.append (mRNA_producer3(DNAseq, posn, lst))
     print (mRNAlst)
 
@@ -161,13 +171,13 @@ mRNAdic = {}
 DNAsequence = str(input("Input DNA sequence to produce multiple mRNA: "))
 start_posns(DNAsequence, 0)
 mRNAlst = multiple_mRNA3(DNAsequence, start_codons, [])
-print (mRNAlst[0:1])
+
 
 ##mRNA1 = mRNAlst[0:1]
 ##print (mRNA1)
 ##mRNAdic['mRNA1'] = mRNA1
 
-for posn in start_codons:
-    mRNAdic = dict([mRNA_counter, mRNA]) #need mRNA_counter fcn
-    dict([("mRNA1", mRNA1), ("mRNA2", mRNA2), ("mRNA3", mRNA3)])
+##for posn in start_codons:
+##    mRNAdic = dict([mRNA_counter, mRNA]) #need mRNA_counter fcn
+##    dict([("mRNA1", mRNA1), ("mRNA2", mRNA2), ("mRNA3", mRNA3)])
     
