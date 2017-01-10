@@ -138,7 +138,7 @@ def multiple_mRNA3(DNAseq, start_posns, lst):
 
 mRNAlst = []
 def multiple_mRNA4(DNAseq, start_posns):
-    count = 0
+    count = 0  
     for posn in start_posns:
         count = count + 1
         mRNAlst.append("mRNA" + (str(count)) + ":")
@@ -167,10 +167,15 @@ chair = [1, 10, 45]
 ##for item in start_codons:
 ##
 
-mRNAdic = {}
 DNAsequence = str(input("Input DNA sequence to produce multiple mRNA: "))
 start_posns(DNAsequence, 0)
-mRNAlst = multiple_mRNA3(DNAsequence, start_codons, [])
+mRNAlst = []
+mRNAlst.append(multiple_mRNA3(DNAsequence, start_codons, []))
+mRNAdic = {}
+def form_dic(count, lst):
+    mRNAdic['mRNA1'] = "firststrand"
+
+testlst = [['chair'], ['dinosaur'], 'animals']
 
 
 ##mRNA1 = mRNAlst[0:1]
