@@ -141,9 +141,8 @@ def multiple_mRNA4(DNAseq, start_posns):
     count = 0  
     for posn in start_posns:
         count = count + 1
-        mRNAlst.append("mRNA" + (str(count)) + ":")
-        mRNAlst.append (mRNA_producer3(DNAseq, posn, lst))
-    print (mRNAlst)
+        mRNAlst.append (mRNA_producer3(DNAseq, posn, []))
+    return mRNAlst
 
 chair = [1, 10, 45]
 ##make a dictionary with this, key and value
