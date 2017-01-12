@@ -81,17 +81,6 @@ def start_posns(DNAseq, position):
         else:
             position = position + 1
 
-##def start_posns(DNAseq, position, lst):
-##    while position <= len(DNAseq) - 2:
-##        if DNAseq[position:position+3] == "ATG":
-##            lst.append(position)
-##            position = position + 3
-##        elif position == len(DNAseq) - 2:
-##            print lst
-##            break
-##        else:
-##            position = position + 1
-
 ## prints mRNA
 def multiple_mRNA2(DNAseq, start_posns, lst):
     count = 0
@@ -144,17 +133,8 @@ def multiple_mRNA4(DNAseq, start_posns):
         mRNAlst.append (mRNA_producer3(DNAseq, posn, []))
     return mRNAlst
 
-chair = [1, 10, 45]
-##make a dictionary with this, key and value
+
 ##see what's longer than 100 AA
-
-##DNAsequence = str(raw_input("Input DNA sequence to produce multiple mRNA: "))
-##start_codons = start_posns(DNAsequence, 0, [])
-##multiple_mRNA2(DNAsequence, start_codons, [])
-
-##DNAsequence = str(raw_input("Input DNA sequence to produce multiple mRNA: "))
-##start_codons = start_posns(DNAsequence, 0, [])
-##multiple_mRNA3(DNAsequence, start_codons, [])
 
 mRNAdic = {}
 def form_dic(lst):
@@ -170,20 +150,9 @@ def form_dic(lst):
             mRNAdic[key] = strand
     return mRNAdic
 
-DNAsequence = str(input("Input DNA sequence to produce multiple mRNA: "))
+DNAsequence = str(input("Input DNA sequence to produce multiple mRNA:"))
 start_posns(DNAsequence, 0)
 mRNAlst = []
 mRNAlst.append(multiple_mRNA4(DNAsequence, start_codons))
 form_dic(mRNAlst)
 print (mRNAdic)
-
-
-
-##mRNA1 = mRNAlst[0:1]
-##print (mRNA1)
-##mRNAdic['mRNA1'] = mRNA1
-
-##for posn in start_codons:
-##    mRNAdic = dict([mRNA_counter, mRNA]) #need mRNA_counter fcn
-##    dict([("mRNA1", mRNA1), ("mRNA2", mRNA2), ("mRNA3", mRNA3)])
-    
