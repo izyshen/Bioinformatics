@@ -156,25 +156,27 @@ chair = [1, 10, 45]
 ##start_codons = start_posns(DNAsequence, 0, [])
 ##multiple_mRNA3(DNAsequence, start_codons, [])
 
-
-
-# Dictionary
-
-##def mRNAcounter(DNA):
-##    count = 0
-    
-##for item in start_codons:
-##
+mRNAdic = {}
+def form_dic(lst):
+    count = 0
+    for strand in lst:
+        count = count + 1
+        key = "mRNA" + str(count)
+        mRNAdic[key] = strand
+        if strand == "no stop codon":
+            mRNAdic[key] = strand
+            break
+        else:
+            mRNAdic[key] = strand
+    return mRNAdic
 
 DNAsequence = str(input("Input DNA sequence to produce multiple mRNA: "))
 start_posns(DNAsequence, 0)
 mRNAlst = []
-mRNAlst.append(multiple_mRNA3(DNAsequence, start_codons, []))
-mRNAdic = {}
-def form_dic(count, lst):
-    mRNAdic['mRNA1'] = "firststrand"
+mRNAlst.append(multiple_mRNA4(DNAsequence, start_codons))
+form_dic(mRNAlst)
+print (mRNAdic)
 
-testlst = [['chair'], ['dinosaur'], 'animals']
 
 
 ##mRNA1 = mRNAlst[0:1]
